@@ -161,7 +161,7 @@ Symplectic Euler with 3D angular velocity (omega x v for Magnus). Sequential imp
 
 ## Discussion
 
-Questions, feedback, or want to show off your SOTM shots? Post in the [Chief Delphi thread](https://www.chiefdelphi.com/t/open-source-shoot-on-the-move-solver-ball-physics-sim-3-java-files-drop-in/).
+Questions, feedback, or want to show off your SOTM shots? Post in the [Chief Delphi thread](https://www.chiefdelphi.com/t/open-source-shoot-on-the-move-sotm-solver-ball-physics-sim-3-java-files-drop-in/).
 
 ## License
 
