@@ -149,16 +149,16 @@ public class ShotCalculator {
     public double wDistanceInRange = 0.5;
     public double headingMaxErrorRad = Math.toRadians(15);
 
-    // M162: heading tolerance tightens as robot speed increases.
+    // Heading tolerance tightens as robot speed increases.
     // scaledMaxError = base / (1 + speedScalar * speed). Set to 0 to disable.
     public double headingSpeedScalar = 1.0;
 
-    // M212: heading tolerance scales with distance from hub.
+    // Heading tolerance scales with distance from hub.
     // Closer = tighter because small angle errors matter more up close.
     // scaledMaxError *= referenceDistance / distance, clamped [0.5, 2.0].
     public double headingReferenceDistance = 2.5; // meters
 
-    // M148: suppress firing when pitch or roll exceeds this threshold.
+    // Suppress firing when pitch or roll exceeds this threshold.
     // Bumps and ramps tilt the robot, which throws off aim. Set to 90 to disable.
     public double maxTiltDeg = 5.0;
   }
@@ -177,7 +177,7 @@ public class ShotCalculator {
   private double previousTOF = -1;
   private double previousSpeed = 0;
 
-  // M221: previous-cycle velocities for acceleration estimation
+  // Previous-cycle velocities for acceleration estimation
   private double prevRobotVx = 0;
   private double prevRobotVy = 0;
   private double prevRobotOmega = 0;
@@ -248,7 +248,7 @@ public class ShotCalculator {
       return LaunchParameters.INVALID;
     }
 
-    // M221: second-order pose prediction. Instead of just v*dt, we use v*dt + 0.5*a*dt^2
+    // Second-order pose prediction. Instead of just v*dt, we use v*dt + 0.5*a*dt^2
     // where acceleration is estimated from the velocity delta between this cycle and last.
     // This tracks better through turns and speed changes because it catches the curvature.
     double dt = config.phaseDelayMs / 1000.0;
@@ -281,7 +281,7 @@ public class ShotCalculator {
       return LaunchParameters.INVALID;
     }
 
-    // M148: tilt gate. Bumps and ramps knock the launcher off-axis, so
+    // Tilt gate. Bumps and ramps knock the launcher off-axis, so
     // suppress firing when the chassis is tilted beyond the threshold.
     if (Math.abs(inputs.pitchDeg()) > config.maxTiltDeg
         || Math.abs(inputs.rollDeg()) > config.maxTiltDeg) {
@@ -488,7 +488,7 @@ public class ShotCalculator {
     // 3. Vision confidence (0-1, from caller)
     double visionConf = MathUtil.clamp(visionConfidence, 0, 1);
 
-    // 4. Heading accuracy with M162 speed scaling and M212 distance scaling.
+    // 4. Heading accuracy with speed scaling and distance scaling.
     // Faster robot = tighter tolerance (because velocity errors compound).
     // Closer to hub = tighter tolerance (because small angles mean big misses).
     double distanceScale = MathUtil.clamp(
