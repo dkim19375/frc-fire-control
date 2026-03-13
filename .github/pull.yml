@@ -1,0 +1,8 @@
+version: "1"
+rules:
+  - base: main
+    upstream: eeveemara:main # change `wei` to the owner of upstream repo
+    mergeMethod: merge
+    mergeUnstable: false
+    conflictReviewers:
+      - dkim19375
